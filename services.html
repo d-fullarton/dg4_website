@@ -6,7 +6,21 @@
   <title>Services — Digital Gloss</title>
   <meta name="description" content="Website development, marketing and branding from Digital Gloss in Abu Dhabi, explained in plain English.">
   <meta name="theme-color" content="#18181B">
-  <link rel="icon" href="Images/dg_logo.png">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="canonical" href="https://digital-gloss.com/services.html">
+  <meta property="og:title" content="Services — Digital Gloss">
+  <meta property="og:description" content="Website development, marketing and branding from Digital Gloss in Abu Dhabi, explained in plain English.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://digital-gloss.com/services.html">
+  <meta property="og:image" content="https://digital-gloss.com/Images/og-share.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Digital Gloss: websites, marketing and branding in Abu Dhabi.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:site_name" content="Digital Gloss">
+  <meta property="og:locale" content="en_GB">
   <link rel="stylesheet" href="css/styles.css">
   <script>document.documentElement.classList.remove('no-js');</script>
 </head>
@@ -22,7 +36,6 @@
       <nav class="primary-nav" aria-label="Main">
         <ul class="nav-list">
           <li><a class="nav-link" href="index.html#home">Home</a></li>
-          <li><a class="nav-link" href="index.html#about">About</a></li>
           <li class="has-dropdown">
             <a class="nav-link dropdown-toggle is-active" aria-current="page" href="services.html" aria-haspopup="true" aria-expanded="false" aria-controls="services-menu">
               Services
@@ -36,10 +49,13 @@
               </ul>
             </div>
           </li>
+          <li><a class="nav-link" href="about.html">About us</a></li>
+          <li><a class="nav-link" href="faq.html">FAQ</a></li>
         </ul>
       </nav>
       <div class="header-actions">
-        <a class="btn btn-primary btn-contact" href="contact.html">Get in touch</a>
+        <a class="header-wa" href="https://wa.me/971555810759" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+        <a class="btn btn-primary btn-contact" href="contact.html">Contact us</a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -48,7 +64,6 @@
   <div class="mobile-menu" id="mobile-menu" aria-label="Mobile menu">
     <ul class="mobile-menu__list">
       <li><a class="mobile-btn" href="index.html#home">Home</a></li>
-      <li><a class="mobile-btn" href="index.html#about">About</a></li>
       <li>
         <button class="mobile-btn mobile-sub-toggle" type="button" aria-expanded="false" aria-controls="mobile-services">
           Services
@@ -63,102 +78,205 @@
           </ul>
         </div>
       </li>
-      <li class="mobile-menu__contact"><a class="btn btn-primary" href="contact.html">Get in touch</a></li>
+      <li><a class="mobile-btn" href="about.html">About us</a></li>
+      <li><a class="mobile-btn" href="faq.html">FAQ</a></li>
+      <li class="mobile-menu__contact"><a class="btn btn-primary" href="contact.html">Contact us</a></li>
     </ul>
     <p class="mobile-menu__foot">Located in Abu Dhabi.<br>Proudly serving the UAE and locations worldwide.</p>
   </div>
 
   <main id="main">
+    <nav class="svc-subnav" aria-label="Jump between services">
+      <div class="container svc-subnav__in">
+        <a href="#web-development">Website</a>
+        <a href="#marketing">Marketing</a>
+        <a href="#branding">Branding</a>
+      </div>
+    </nav>
+
     <section class="page-hero" aria-labelledby="services-title">
       <div class="container">
-        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Services</span></nav>
-        <h1 class="headline-lg" id="services-title">Our services</h1>
-        <p class="body-lg">A website to be found, marketing to be seen, and a brand to be remembered. Choose one service or combine all three. We’ll explain every step in plain English and shape the work around your goals, your customers and your budget.</p>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><span aria-current="page">Services</span></nav>
+        <h1 class="headline-lg svc-hero__title" id="services-title">Built around your business</h1>
+        <p class="svc-hero__intro">We create high-quality websites, marketing and branding built around your goals and your audience. Through collaboration and personal service, we deliver work that makes a difference from concept to launch.</p>
+      </div>
+    </section>
 
-        <div class="svc-strip">
-          <a class="svc-strip__item" href="#web-development">
-            <picture>
-              <source type="image/avif" srcset="Images/web-dev-photo-720.avif 720w, Images/web-dev-photo-1200.avif 1200w" sizes="(min-width: 768px) 30vw, 92vw">
-              <source type="image/webp" srcset="Images/web-dev-photo-720.webp 720w, Images/web-dev-photo-1200.webp 1200w" sizes="(min-width: 768px) 30vw, 92vw">
-              <img src="Images/web-dev-photo-1200.webp" alt="A web designer’s desk with a monitor showing a website and its code, a laptop and phone showing the mobile version, and hand-drawn wireframes" width="1200" height="679" loading="lazy" decoding="async" style="object-position:50% 40%">
-            </picture>
-            <span class="svc-strip__label"><span class="mono">1</span> Website development
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M8 2v11M4 9l4 4 4-4"/></svg></span>
-          </a>
-          <a class="svc-strip__item" href="#marketing">
-            <picture>
-              <source type="image/avif" srcset="Images/marketing-photo-720.avif 720w, Images/marketing-photo-1200.avif 1200w" sizes="(min-width: 768px) 30vw, 92vw">
-              <source type="image/webp" srcset="Images/marketing-photo-720.webp 720w, Images/marketing-photo-1200.webp 1200w" sizes="(min-width: 768px) 30vw, 92vw">
-              <img src="Images/marketing-photo-1200.webp" alt="A hand placing a sticky note on a social media content calendar beside sketched post layouts, a phone and a laptop" width="1200" height="679" loading="lazy" decoding="async" style="object-position:50% 40%">
-            </picture>
-            <span class="svc-strip__label"><span class="mono">2</span> Marketing
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M8 2v11M4 9l4 4 4-4"/></svg></span>
-          </a>
-          <a class="svc-strip__item" href="#branding">
-            <picture>
-              <source type="image/avif" srcset="Images/branding-photo-720.avif 720w, Images/branding-photo-1200.avif 1200w" sizes="(min-width: 768px) 30vw, 92vw">
-              <source type="image/webp" srcset="Images/branding-photo-720.webp 720w, Images/branding-photo-1200.webp 1200w" sizes="(min-width: 768px) 30vw, 92vw">
-              <img src="Images/branding-photo-1200.webp" alt="A hand holding a dark business card over logo sketches, colour swatches, a typeface specimen and letterhead" width="1200" height="679" loading="lazy" decoding="async" style="object-position:50% 40%">
-            </picture>
-            <span class="svc-strip__label"><span class="mono">3</span> Branding
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M8 2v11M4 9l4 4 4-4"/></svg></span>
-          </a>
+    <!-- ============================ STORY: build, grow, be remembered (pins while you scroll on tablets and desktops) ============================ -->
+    <section class="svc-story" aria-label="What we do">
+      <div class="container svc-story__stage">
+        <div class="svc-story__rail" aria-hidden="true">
+          <span class="svc-story__track"><span class="svc-story__fill"></span></span>
+          <ol>
+            <li><button type="button" tabindex="-1" data-go="0"><span>1</span>Website development</button></li>
+            <li><button type="button" tabindex="-1" data-go="1"><span>2</span>Marketing</button></li>
+            <li><button type="button" tabindex="-1" data-go="2"><span>3</span>Branding</button></li>
+          </ol>
+        </div>
+        <div class="svc-story__chs">
+          <div class="svc-story__ch is-active" data-ch="0">
+            <p class="svc-story__kicker"><span>1</span>Website development</p>
+            <p class="svc-story__word"><span>Build.</span></p>
+            <p class="svc-story__text">Websites that load fast, look right and turn visitors into enquiries.</p>
+            <a class="link-ring svc-story__go" href="#web-development"><span class="link-ring__label">See what’s included<span class="visually-hidden"> in website development</span></span><span class="link-ring__icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
+          </div>
+          <div class="svc-story__ch" data-ch="1">
+            <p class="svc-story__kicker"><span>2</span>Marketing</p>
+            <p class="svc-story__word"><span>Grow.</span></p>
+            <p class="svc-story__text">Marketing that puts you in front of the right people.</p>
+            <a class="link-ring svc-story__go" href="#marketing"><span class="link-ring__label">See what’s included<span class="visually-hidden"> in marketing</span></span><span class="link-ring__icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
+          </div>
+          <div class="svc-story__ch" data-ch="2">
+            <p class="svc-story__kicker"><span>3</span>Branding</p>
+            <p class="svc-story__word"><span>Be remembered.</span></p>
+            <p class="svc-story__text">A brand people recognise everywhere they meet you.</p>
+            <a class="link-ring svc-story__go" href="#branding"><span class="link-ring__label">See what’s included<span class="visually-hidden"> in branding</span></span><span class="link-ring__icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section service-detail" id="web-development" aria-labelledby="web-development-title">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="headline-lg" id="web-development-title">Website development</h2>
+      <div class="container svc-layout">
+        <div class="svc-copy">
+          <div class="section-head">
+            <h2 class="headline-lg" id="web-development-title"><img class="svc-icon" src="Images/icon-web.webp" alt="" width="56" height="56">Website development</h2>
+          </div>
+          <div class="service-detail__body">
+            <p class="body-lg">Your website will almost certainly be your customers’ first impression of your business. It’s your first interaction with every prospect and you’re unable to influence the outcome so it’s important your website looks right, loads quickly and makes it easy for people to contact you.</p>
+            <p>We specialise in providing custom web development services tailored to your individual needs. Your website is not just a brochure; it should be a continually evolving growth engine that converts visitors into customers and where Return On Investment (“ROI”) can be measured.</p>
+          </div>
+          <a class="link-ring svc-cta" href="contact.html?service=web"><span class="link-ring__label">Start a website project</span><span class="link-ring__icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
         </div>
-        <div class="service-detail__body">
-          <p class="body-lg">Your website is often the first impression of your business, so it needs to look right, load quickly and make it easy for people to get in touch. We design and build it around your goals and your customers, then look after it once it’s live.</p>
-          <p>Not sure which type of website you need? Start with a simple domain website, a set of pages with your own web address, ideal when your content rarely changes. If you’d like to update your own content or sell online, we’ll build on a Content Management System (“CMS”), with an e-commerce store if you need one. We’ll recommend what fits and explain why.</p>
-          <ul class="detail-list">
-            <li>Planning and design shaped around your audience</li>
-            <li>Building that works on phones, tablets and computers</li>
-            <li>Your web address, secure hosting and fast loading</li>
-            <li>Launch, training and ongoing support, updates and improvements</li>
-          </ul>
+        <div class="svc-side reveal reveal--up">
+          <picture class="svc-photo" aria-hidden="true">
+            <source type="image/avif" srcset="Images/web-dev-photo-720.avif 720w, Images/web-dev-photo-1200.avif 1200w" sizes="(min-width: 961px) 50vw, 100vw">
+            <source type="image/webp" srcset="Images/web-dev-photo-720.webp 720w, Images/web-dev-photo-1200.webp 1200w" sizes="(min-width: 961px) 50vw, 100vw">
+            <img src="Images/web-dev-photo-1200.webp" alt="" width="1200" height="679" loading="lazy" decoding="async">
+          </picture>
+          <aside class="svc-panel" aria-label="What’s included in website development">
+            <p class="label label--dot">What’s included</p>
+            <ol class="svc-list">
+                <li>Web design</li>
+                <li>Web development</li>
+                <li>Image and video media creation</li>
+                <li>Content creation</li>
+                <li>Assistance with your web address and hosting</li>
+                <li>Website maintenance and support</li>
+            </ol>
+          </aside>
+        </div>
+      </div>
+      <div class="container svc-outcome reveal reveal--up">
+        <div class="svc-outcome__steps">
+          <p class="label label--dot">The shape of a project</p>
+          <ol><li>Discover</li><li>Design</li><li>Build</li><li>Launch and care</li></ol>
+        </div>
+        <div class="svc-outcome__gets">
+          <p class="label label--dot">You walk away with</p>
+          <ul><li>A fast mobile ready website</li><li>Your content and imagery in place</li><li>Enquiry and analytics tracking set up</li><li>A care plan so your website stays healthy</li></ul>
         </div>
       </div>
     </section>
 
     <section class="section service-detail" id="marketing" aria-labelledby="marketing-title">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="headline-lg" id="marketing-title">Marketing</h2>
+      <div class="container svc-layout">
+        <div class="svc-copy">
+          <div class="section-head">
+            <h2 class="headline-lg" id="marketing-title"><img class="svc-icon" src="Images/icon-marketing.webp" alt="" width="56" height="56">Marketing</h2>
+          </div>
+          <div class="service-detail__body">
+            <p class="body-lg">A great looking marketing campaign that doesn’t convert is an expensive decoration. We carefully engineer something that performs as well as it looks. We approach this with lead generation and conversion optimisation in mind from the start with a clear funnel that steers customers straight back to you and your website.</p>
+          </div>
+          <a class="link-ring svc-cta" href="contact.html?service=marketing"><span class="link-ring__label">Plan your marketing</span><span class="link-ring__icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
         </div>
-        <div class="service-detail__body">
-          <p class="body-lg">Marketing puts your business in front of the people who are looking for what you offer. We focus on social media, where your customers already spend their time, and build a clear plan around your goals so every post has a purpose.</p>
-          <p>We start by getting to know your audience, your competition and what makes you different. From there we plan, create and publish content that fits your brand, then look at what’s working and improve it. You’ll always know what’s going out, why, and what it’s achieving. SEO, CTR, CPC… we’ll translate.</p>
-          <ul class="detail-list">
-            <li>Research into your audience and competitors</li>
-            <li>A social media strategy and content calendar</li>
-            <li>Photos, graphics and posts made for your brand</li>
-            <li>Posting, paid campaigns and community management</li>
-            <li>Clear reports on measurable results</li>
-          </ul>
+        <div class="svc-side reveal reveal--up">
+          <picture class="svc-photo" aria-hidden="true">
+            <source type="image/avif" srcset="Images/marketing-photo-720.avif 720w, Images/marketing-photo-1200.avif 1200w" sizes="(min-width: 961px) 50vw, 100vw">
+            <source type="image/webp" srcset="Images/marketing-photo-720.webp 720w, Images/marketing-photo-1200.webp 1200w" sizes="(min-width: 961px) 50vw, 100vw">
+            <img src="Images/marketing-photo-1200.webp" alt="" width="1200" height="679" loading="lazy" decoding="async">
+          </picture>
+          <aside class="svc-panel" aria-label="What’s included in marketing">
+            <p class="label label--dot">What’s included</p>
+            <ol class="svc-list">
+                <li>SEO / CRO</li>
+                <li>Research your audience and competitors</li>
+                <li>Social media advertising</li>
+                <li>Google Ads</li>
+                <li>Content writing and posting</li>
+                <li>Photos, graphics and posts made for your brand</li>
+                <li>Community management</li>
+                <li>Analytics and reporting</li>
+            </ol>
+          </aside>
+        </div>
+      </div>
+      <div class="container svc-outcome reveal reveal--up">
+        <div class="svc-outcome__steps">
+          <p class="label label--dot">The shape of a project</p>
+          <ol><li>Research</li><li>Plan</li><li>Launch</li><li>Report and refine</li></ol>
+        </div>
+        <div class="svc-outcome__gets">
+          <p class="label label--dot">You walk away with</p>
+          <ul><li>Audience and competitor insight</li><li>A clear channel and content plan</li><li>Content and live campaigns</li><li>Monthly reporting</li></ul>
         </div>
       </div>
     </section>
 
     <section class="section service-detail" id="branding" aria-labelledby="branding-title">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="headline-lg" id="branding-title">Branding</h2>
+      <div class="container svc-layout">
+        <div class="svc-copy">
+          <div class="section-head">
+            <h2 class="headline-lg" id="branding-title"><img class="svc-icon" src="Images/icon-branding.webp" alt="" width="56" height="56">Branding</h2>
+          </div>
+          <div class="service-detail__body">
+            <p class="body-lg">Your brand is how people recognise, trust and remember you. We bring your logo, colours, typography, imagery and voice together into one clear story, so your business looks and sounds the same everywhere it appears.</p>
+            <p>Whether you’re starting from scratch or refreshing an established business, we begin by listening to who you are and who you want to reach. We then design an identity that stands out, speaks to the right customers and is ready to grow with you, online and in print.</p>
+          </div>
+          <a class="link-ring svc-cta" href="contact.html?service=branding"><span class="link-ring__label">Build your brand</span><span class="link-ring__icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
         </div>
-        <div class="service-detail__body">
-          <p class="body-lg">Your brand is how people recognise, trust and remember you. We bring your logo, colours, typography, imagery and voice together into one clear story, so your business looks and sounds the same everywhere it appears.</p>
-          <p>Whether you’re starting from scratch or refreshing an established business, we begin by listening to who you are and who you want to reach. We then design an identity that stands out, speaks to the right customers and is ready to grow with you, online and in print.</p>
-          <ul class="detail-list">
-            <li>Brand story, positioning and tone of voice</li>
-            <li>Logo design and variations</li>
-            <li>Colour palette and typography</li>
-            <li>Business cards, letterheads and printed materials</li>
-            <li>Brand guidelines, so everything stays consistent</li>
-          </ul>
+        <div class="svc-side reveal reveal--up">
+          <picture class="svc-photo" aria-hidden="true">
+            <source type="image/avif" srcset="Images/branding-photo-720.avif 720w, Images/branding-photo-1200.avif 1200w" sizes="(min-width: 961px) 50vw, 100vw">
+            <source type="image/webp" srcset="Images/branding-photo-720.webp 720w, Images/branding-photo-1200.webp 1200w" sizes="(min-width: 961px) 50vw, 100vw">
+            <img src="Images/branding-photo-1200.webp" alt="" width="1200" height="679" loading="lazy" decoding="async">
+          </picture>
+          <aside class="svc-panel" aria-label="What’s included in branding">
+            <p class="label label--dot">What’s included</p>
+            <ol class="svc-list">
+                <li>Brand story, positioning and tone of voice</li>
+                <li>Logo design and variations</li>
+                <li>Colour palette and typography</li>
+                <li>Business cards, letterheads and printed materials</li>
+                <li>Brand guidelines, so everything stays consistent</li>
+                <li>Digital templates</li>
+            </ol>
+          </aside>
+        </div>
+      </div>
+      <div class="container svc-outcome reveal reveal--up">
+        <div class="svc-outcome__steps">
+          <p class="label label--dot">The shape of a project</p>
+          <ol><li>Listen</li><li>Explore</li><li>Refine</li><li>Roll out</li></ol>
+        </div>
+        <div class="svc-outcome__gets">
+          <p class="label label--dot">You walk away with</p>
+          <ul><li>Logo and colour palette</li><li>Typography and brand guidelines</li><li>Print and digital templates</li><li>A brand story and tone of voice</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ CTA BAND ============================ -->
+    <section class="container cta-section" aria-labelledby="cta-title">
+      <div class="cta-band card-lux reveal reveal--up">
+        <div>
+          <p class="label label--dot">Not sure where to start?</p>
+          <h2 class="headline-lg" id="cta-title" style="margin-top:14px">Combine two or three services to maximise your ROI</h2>
+          <p>Tell us your goals and we’ll recommend the right mix of website, marketing, and branding and provide one clear proposal.</p>
+        </div>
+        <div class="cta-band__actions">
+          <a class="btn btn-primary" href="contact.html">Talk to our team
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
         </div>
       </div>
     </section>
@@ -173,28 +291,28 @@
           <p>Bespoke websites, marketing and branding for start-ups, small businesses, and independent consultants.</p>
         </div>
         <div class="footer-cols">
-          <nav class="footer-col" aria-labelledby="f-explore">
-            <h2 class="footer-heading" id="f-explore">EXPLORE</h2>
-            <ul>
-              <li><a href="index.html#home">Home</a></li>
-              <li><a href="index.html#about">About</a></li>
-              <li><a href="services.html">Services</a></li>
-            </ul>
-          </nav>
-          <nav class="footer-col" aria-labelledby="f-services">
-            <h2 class="footer-heading" id="f-services">SERVICES</h2>
-            <ul>
-              <li><a href="services.html#web-development">Website development</a></li>
-              <li><a href="services.html#marketing">Marketing</a></li>
-              <li><a href="services.html#branding">Branding</a></li>
-            </ul>
-          </nav>
           <nav class="footer-col" aria-labelledby="f-socials">
             <h2 class="footer-heading" id="f-socials">SOCIALS</h2>
             <ul>
               <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 10 10 4M5 4h5v5"/></svg></a></li>
               <li><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 10 10 4M5 4h5v5"/></svg></a></li>
               <li><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 10 10 4M5 4h5v5"/></svg></a></li>
+            </ul>
+          </nav>
+          <nav class="footer-col" aria-labelledby="f-explore">
+            <h2 class="footer-heading" id="f-explore">EXPLORE</h2>
+            <ul>
+              <li><a href="index.html#home">Home</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="faq.html">FAQ</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-col" aria-labelledby="f-contact">
+            <h2 class="footer-heading" id="f-contact">CONTACT</h2>
+            <ul>
+              <li><a href="tel:+971555810759">+971 55 581 0759</a></li>
+              <li><a href="mailto:solutions@digital-gloss.com">solutions@digital-gloss.com</a></li>
             </ul>
           </nav>
         </div>

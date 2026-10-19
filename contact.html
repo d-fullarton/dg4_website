@@ -6,7 +6,21 @@
   <title>Contact Digital Gloss — Start your project</title>
   <meta name="description" content="Contact Digital Gloss in Abu Dhabi by phone, WhatsApp or email, or send an enquiry about websites, marketing or branding.">
   <meta name="theme-color" content="#18181B">
-  <link rel="icon" href="Images/dg_logo.png">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="canonical" href="https://digital-gloss.com/contact.html">
+  <meta property="og:title" content="Contact Digital Gloss — Start your project">
+  <meta property="og:description" content="Contact Digital Gloss in Abu Dhabi by phone, WhatsApp or email, or send an enquiry about websites, marketing or branding.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://digital-gloss.com/contact.html">
+  <meta property="og:image" content="https://digital-gloss.com/Images/og-share.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Digital Gloss: websites, marketing and branding in Abu Dhabi.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:site_name" content="Digital Gloss">
+  <meta property="og:locale" content="en_GB">
   <link rel="stylesheet" href="css/styles.css">
   <script>document.documentElement.classList.remove('no-js');</script>
 </head>
@@ -22,7 +36,6 @@
       <nav class="primary-nav" aria-label="Main">
         <ul class="nav-list">
           <li><a class="nav-link" href="index.html#home">Home</a></li>
-          <li><a class="nav-link" href="index.html#about">About</a></li>
           <li class="has-dropdown">
             <a class="nav-link dropdown-toggle" href="services.html" aria-haspopup="true" aria-expanded="false" aria-controls="services-menu">
               Services
@@ -36,10 +49,13 @@
               </ul>
             </div>
           </li>
+          <li><a class="nav-link" href="about.html">About us</a></li>
+          <li><a class="nav-link" href="faq.html">FAQ</a></li>
         </ul>
       </nav>
       <div class="header-actions">
-        <a class="btn btn-primary btn-contact" href="contact.html" aria-current="page">Get in touch</a>
+        <a class="header-wa" href="https://wa.me/971555810759" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+        <a class="btn btn-primary btn-contact" href="contact.html" aria-current="page">Contact us</a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -48,7 +64,6 @@
   <div class="mobile-menu" id="mobile-menu" aria-label="Mobile menu">
     <ul class="mobile-menu__list">
       <li><a class="mobile-btn" href="index.html#home">Home</a></li>
-      <li><a class="mobile-btn" href="index.html#about">About</a></li>
       <li>
         <button class="mobile-btn mobile-sub-toggle" type="button" aria-expanded="false" aria-controls="mobile-services">
           Services
@@ -63,7 +78,9 @@
           </ul>
         </div>
       </li>
-      <li class="mobile-menu__contact"><a class="btn btn-primary" href="contact.html" aria-current="page">Get in touch</a></li>
+      <li><a class="mobile-btn" href="about.html">About us</a></li>
+      <li><a class="mobile-btn" href="faq.html">FAQ</a></li>
+      <li class="mobile-menu__contact"><a class="btn btn-primary" href="contact.html" aria-current="page">Contact us</a></li>
     </ul>
     <p class="mobile-menu__foot">Located in Abu Dhabi.<br>Proudly serving the UAE and locations worldwide.</p>
   </div>
@@ -72,8 +89,8 @@
     <section class="page-hero" aria-labelledby="contact-title">
       <div class="container">
         <nav class="breadcrumb" aria-label="Breadcrumb"><span aria-current="page">Contact</span></nav>
-        <h1 class="headline-lg" id="contact-title">Got a bright idea?</h1>
-        <p class="body-lg">Tell us what you’d like to achieve and what’s getting in the way.<br class="br-wide"> We’ll help find the right solutions and create a plan that fits your business.</p>
+        <h1 class="headline-lg" id="contact-title">Talk with our team</h1>
+        <p class="body-lg">Fill out this form to take ownership of your business growth and start seeing results.</p>
       </div>
     </section>
 
@@ -81,33 +98,52 @@
       <!-- Contact details — WhatsApp uses the same number as the telephone -->
       <aside class="contact-aside" aria-labelledby="details-title">
         <h2 class="visually-hidden" id="details-title">Contact details</h2>
+        <div class="contact-person card-lux">
+          <picture class="contact-person__photo">
+            <source type="image/avif" srcset="Images/headshot-640.avif?v=4">
+            <img src="Images/headshot-640.webp?v=4" alt="Derek Fullarton, founder of Digital Gloss" width="640" height="800" loading="lazy" decoding="async">
+          </picture>
+          <div class="contact-person__copy">
+            <p class="label label--dot">You’ll speak directly with</p>
+            <p class="contact-person__name">Derek Fullarton</p>
+            <p class="contact-person__role">Founder, Digital Gloss</p>
+          </div>
+        </div>
         <div class="contact-list">
-          <a class="contact-item" href="tel:+971555810759">
+          <a class="contact-item card-lux" href="tel:+971555810759">
             <span class="contact-item__icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4.5 2.5h3l1.5 4-2 1.2a9 9 0 0 0 5.3 5.3l1.2-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A15 15 0 0 1 3 4.1 1.5 1.5 0 0 1 4.5 2.5Z"/></svg></span>
             <span class="label">Telephone</span>
             <strong>+971 55 581 0759</strong>
           </a>
-          <a class="contact-item" href="https://wa.me/971555810759" target="_blank" rel="noopener">
+          <a class="contact-item card-lux" href="https://wa.me/971555810759" target="_blank" rel="noopener">
             <span class="contact-item__icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3.2 16.8 4.3 13A7.5 7.5 0 1 1 7 15.7l-3.8 1.1Z"/><path d="M7.5 7c.3 2.3 2.2 4.2 4.5 4.6l1-1.1-1.6-.8-.7.6a3.5 3.5 0 0 1-1.9-1.9l.6-.7-.8-1.6L7.5 7Z"/></svg></span>
             <span class="label">WhatsApp</span>
             <strong>+971 55 581 0759</strong>
           </a>
-          <a class="contact-item" href="mailto:team@digitalgloss.com">
+          <a class="contact-item card-lux" href="mailto:solutions@digital-gloss.com">
             <span class="contact-item__icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="2.5" y="4.5" width="15" height="11" rx="1.5"/><path d="m3 5.5 7 5.5 7-5.5"/></svg></span>
             <span class="label">Email</span>
-            <strong>team@digitalgloss.com</strong>
+            <strong>solutions@digital-gloss.com</strong>
           </a>
-          <div class="contact-item">
-            <span class="contact-item__icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3 9.5 10 3l7 6.5V17H3Z"/><path d="M8 17v-4.5h4V17"/></svg></span>
-            <span class="label">Address</span>
-            <address style="font-style:normal"><strong>Abu Dhabi, United Arab Emirates</strong></address>
+          <div class="contact-item card-lux">
+            <span class="contact-item__icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M10 5.5V10l3 2"/></svg></span>
+            <span class="label">Local time</span>
+            <strong><time data-local-time hidden></time><span data-local-place>Abu Dhabi</span></strong>
+            <address class="contact-time"><span class="contact-time__dot" aria-hidden="true"></span><span>Abu Dhabi, United Arab Emirates (GMT+4)</span></address>
           </div>
         </div>
-        <p class="contact-aside__note">Not sure what you need yet? That’s completely fine. Tell us about your business and we’ll discuss what best suits your needs.</p>
+        <div class="next-steps">
+          <p class="label label--dot">What happens next</p>
+          <ol>
+            <li><strong>We reply</strong><span>Within one working day, by email or WhatsApp, whichever you prefer.</span></li>
+            <li><strong>A short discovery call</strong><span>Twenty minutes to understand your business, goals and audience. No obligation.</span></li>
+            <li><strong>One clear proposal</strong><span>The right mix of services, a timeline and a fixed price. No surprises.</span></li>
+          </ol>
+        </div>
       </aside>
 
       <!-- Enquiry form -->
-      <div class="form-card">
+      <div class="form-card card-lux">
         <div id="form-wrap">
           <h2 class="headline-md">Send an enquiry</h2>
           <p>Fields marked <span style="color:var(--c-tertiary)">*</span> are required.</p>
@@ -120,9 +156,9 @@
                 <p class="error-msg" id="first-name-err">Please enter your first name.</p>
               </div>
               <div class="field">
-                <label for="second-name">Second name <span class="req" aria-hidden="true">*</span></label>
+                <label for="second-name">Surname <span class="req" aria-hidden="true">*</span></label>
                 <input class="input" id="second-name" name="second_name" type="text" autocomplete="family-name" required aria-describedby="second-name-err">
-                <p class="error-msg" id="second-name-err">Please enter your second name.</p>
+                <p class="error-msg" id="second-name-err">Please enter your surname.</p>
               </div>
 
               <div class="field field--full">
@@ -149,32 +185,35 @@
                 <p class="error-msg" id="phone-err">Please enter a valid phone number.</p>
               </div>
 
-              <div class="field field--full">
-                <label for="website">Website URL <span class="opt">(optional)</span></label>
-                <input class="input" id="website" name="website" type="url" inputmode="url" autocomplete="url" placeholder="www.yourbusiness.com" aria-describedby="website-err website-hint">
-                <p class="hint" id="website-hint">Don’t have one yet? Leave it blank — that’s what we’re here for.</p>
-                <p class="error-msg" id="website-err">That doesn’t look like a web address — try something like www.yourbusiness.com.</p>
-              </div>
-
-              <fieldset class="field field--full chips">
-                <legend>Services you’re interested in <span class="opt">(optional)</span></legend>
+              <fieldset class="field field--full chips" id="services-group" aria-describedby="services-err">
+                <legend>Services you’re interested in <span class="req" aria-hidden="true">*</span></legend>
                 <label class="chip"><input type="checkbox" name="services" value="Website development" data-key="web"><span>Website development</span></label>
                 <label class="chip"><input type="checkbox" name="services" value="Marketing" data-key="marketing"><span>Marketing</span></label>
                 <label class="chip"><input type="checkbox" name="services" value="Branding" data-key="branding"><span>Branding</span></label>
                 <label class="chip"><input type="checkbox" name="services" value="Not sure yet" data-key="unsure"><span>Not sure yet</span></label>
+                <p class="error-msg" id="services-err">Please choose at least one service, or “Not sure yet”.</p>
               </fieldset>
+
+
 
               <div class="field field--full">
                 <label for="message">How can we help? <span class="req" aria-hidden="true">*</span></label>
-                <textarea class="textarea" id="message" name="message" required placeholder="Please provide a summary about your business and the services that you’re interested in — e.g. domain website, E-commerce website, social media marketing campaign, content creation, branding services." aria-describedby="message-err"></textarea>
+                <textarea class="textarea" id="message" name="message" required placeholder="Please provide a summary about your business and the services that you’re interested in." aria-describedby="message-err"></textarea>
                 <p class="error-msg" id="message-err">Please tell us a little about what you need.</p>
+              </div>
+              <div class="field field--full form-agree">
+                <label class="form-agree__row" for="privacy-agree">
+                  <input class="form-agree__box" id="privacy-agree" name="privacy_read" type="checkbox" required aria-describedby="privacy-agree-err">
+                  <span>I have read the <a href="privacy.html">privacy policy</a>. <span class="req" aria-hidden="true">*</span></span>
+                </label>
+                <p class="error-msg" id="privacy-agree-err">Please tick the box to confirm you have read the privacy policy.</p>
               </div>
             </div>
 
             <div class="form-actions">
               <button class="btn btn-primary" type="submit">Send enquiry
                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
-              <p class="form-privacy">We use the details you send only to reply to your enquiry and, if you hire us, to deliver the work. Read our <a href="privacy.html">privacy policy</a> to see how we protect them and what your rights are.</p>
+              <p class="form-privacy">We use the details you send only to reply to your enquiry and, if you hire us, to deliver the work. Read our privacy policy to see how we protect them and what your rights are.</p>
             </div>
           </form>
         </div>
@@ -182,7 +221,7 @@
         <div class="form-success" id="form-success" hidden tabindex="-1">
           <div class="check-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
           <h2 class="headline-md">Thank you, <span data-first-name>there</span>.</h2>
-          <p>Your enquiry is with us. We’ll be in touch soon — and if it’s urgent, you’re always welcome to call or message us on WhatsApp.</p>
+          <p>Your email app should now open with your enquiry ready. Please press send and we’ll be in touch soon — and if it’s urgent, you’re always welcome to call or message us on WhatsApp.</p>
           <a class="btn btn-secondary" href="index.html">Back to home</a>
         </div>
       </div>
@@ -198,28 +237,28 @@
           <p>Bespoke websites, marketing and branding for start-ups, small businesses, and independent consultants.</p>
         </div>
         <div class="footer-cols">
-          <nav class="footer-col" aria-labelledby="f-explore">
-            <h2 class="footer-heading" id="f-explore">EXPLORE</h2>
-            <ul>
-              <li><a href="index.html#home">Home</a></li>
-              <li><a href="index.html#about">About</a></li>
-              <li><a href="services.html">Services</a></li>
-            </ul>
-          </nav>
-          <nav class="footer-col" aria-labelledby="f-services">
-            <h2 class="footer-heading" id="f-services">SERVICES</h2>
-            <ul>
-              <li><a href="services.html#web-development">Website development</a></li>
-              <li><a href="services.html#marketing">Marketing</a></li>
-              <li><a href="services.html#branding">Branding</a></li>
-            </ul>
-          </nav>
           <nav class="footer-col" aria-labelledby="f-socials">
             <h2 class="footer-heading" id="f-socials">SOCIALS</h2>
             <ul>
               <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 10 10 4M5 4h5v5"/></svg></a></li>
               <li><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 10 10 4M5 4h5v5"/></svg></a></li>
               <li><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 10 10 4M5 4h5v5"/></svg></a></li>
+            </ul>
+          </nav>
+          <nav class="footer-col" aria-labelledby="f-explore">
+            <h2 class="footer-heading" id="f-explore">EXPLORE</h2>
+            <ul>
+              <li><a href="index.html#home">Home</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="faq.html">FAQ</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-col" aria-labelledby="f-contact">
+            <h2 class="footer-heading" id="f-contact">CONTACT</h2>
+            <ul>
+              <li><a href="tel:+971555810759">+971 55 581 0759</a></li>
+              <li><a href="mailto:solutions@digital-gloss.com">solutions@digital-gloss.com</a></li>
             </ul>
           </nav>
         </div>

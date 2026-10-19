@@ -14,8 +14,11 @@ export default defineConfig({
       input: {
         main: page('index.html'),
         services: page('services.html'),
+        about: page('about.html'),
+        faq: page('faq.html'),
         contact: page('contact.html'),
         privacy: page('privacy.html'),
+        notFound: page('404.html'),
       },
     },
   },

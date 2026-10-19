@@ -7,6 +7,92 @@
   var mobileMenu = document.getElementById('mobile-menu');
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------- Services: "Build. Grow. Be remembered." pins while you scroll through it (tablets and desktops) ---------- */
+  (function () {
+    var story = document.querySelector('.svc-story');
+    if (!story) return;
+    var stage = story.querySelector('.svc-story__stage');
+    var chapters = [].slice.call(story.querySelectorAll('.svc-story__ch'));
+    var stops = [].slice.call(story.querySelectorAll('[data-go]'));
+    var fill = story.querySelector('.svc-story__fill');
+    var wide = window.matchMedia('(min-width: 768px)');
+    var active = -1, ticking = false;
+
+    var pinned = function () { return story.classList.contains('is-pinned'); };
+    var measure = function () {
+      var r = story.getBoundingClientRect();
+      var top = parseFloat(getComputedStyle(stage).top) || 0;
+      var travel = r.height - stage.offsetHeight;
+      return { start: r.top + window.scrollY - top, travel: travel, p: travel > 0 ? Math.min(1, Math.max(0, (top - r.top) / travel)) : 0 };
+    };
+    var show = function (i) {
+      if (i === active) return;
+      active = i;
+      chapters.forEach(function (c, k) { c.classList.toggle('is-active', k === i); c.classList.toggle('is-past', k < i); });
+      stops.forEach(function (b, k) { if (k === i) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
+    };
+    var update = function () {
+      ticking = false;
+      if (!pinned()) return;
+      var m = measure();
+      fill.style.transform = 'scaleY(' + m.p.toFixed(3) + ')';
+      show(Math.min(chapters.length - 1, Math.floor(m.p * chapters.length)));
+    };
+    var go = function (k, smooth) {
+      var m = measure();
+      window.scrollTo({ top: m.start + (k + 0.5) / chapters.length * m.travel, behavior: smooth ? 'smooth' : 'auto' });
+    };
+    var setup = function () {
+      var on = wide.matches && !reduceMotion;
+      story.classList.toggle('is-pinned', on);
+      if (on) { story.style.setProperty('--stage-h', stage.offsetHeight + 'px'); active = -1; update(); }
+      else { story.style.removeProperty('--stage-h'); fill.style.transform = ''; }
+    };
+
+    stops.forEach(function (b, k) { b.addEventListener('click', function () { go(k, true); }); });
+    chapters.forEach(function (c, k) {
+      c.addEventListener('focusin', function () { if (pinned() && k !== active) go(k, false); }); /* a keyboard user tabbing to a hidden chapter brings it into view */
+    });
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    window.addEventListener('resize', setup);
+    if (wide.addEventListener) wide.addEventListener('change', setup);
+    setup();
+  })();
+
+  /* ---------- Services: a slim bar under the header appears once the opening is behind you and follows where you are ---------- */
+  (function () {
+    var nav = document.querySelector('.svc-subnav');
+    if (!nav) return;
+    var story = document.querySelector('.svc-story');
+    var links = [].slice.call(nav.querySelectorAll('a[href^="#"]'));
+    var targets = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+    var ticking = false;
+    var update = function () {
+      ticking = false;
+      var behind = story ? story.getBoundingClientRect().bottom < (header ? header.offsetHeight : 70) + 20 : window.scrollY > 400;
+      nav.classList.toggle('is-visible', behind);
+      var line = window.innerHeight * 0.4, cur = -1;
+      targets.forEach(function (t, i) { if (t && t.getBoundingClientRect().top <= line) cur = i; });
+      links.forEach(function (a, i) { if (i === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+    };
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
+  /* ---------- Contact: the current time in Abu Dhabi ---------- */
+  (function () {
+    var t = document.querySelector('[data-local-time]');
+    if (!t || !window.Intl) return;
+    var place = document.querySelector('[data-local-place]');
+    var fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Dubai', hour: '2-digit', minute: '2-digit' });
+    var tick = function () { var now = new Date(); t.textContent = fmt.format(now); t.setAttribute('datetime', now.toISOString()); };
+    tick();
+    t.hidden = false;
+    if (place) place.textContent = ' in Abu Dhabi'; /* without the script the card simply reads "Abu Dhabi" */
+    setInterval(tick, 30000);
+  })();
+
   /* ---------- Header: transparent at top, canvas tint once scrolled ---------- */
   function onScroll() {
     if (!header) return;
@@ -122,7 +208,7 @@
         if (en.isIntersecting) {
           var el = en.target;
           var siblings = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
-          el.style.transitionDelay = el.matches('.reveal--fade') ? '0ms' : Math.min(siblings, 4) * (el.matches('.reveal--left, .reveal--up') ? 180 : 80) + 'ms';
+          el.style.transitionDelay = el.dataset.revealDelay ? el.dataset.revealDelay + 'ms' : el.matches('.reveal--fade') ? '0ms' : Math.min(siblings, 4) * (el.matches('.reveal--left, .reveal--up') ? 180 : 80) + 'ms'; // data-reveal-delay overrides the sibling stagger (the industry mosaic staggers by column instead)
           el.classList.add('is-visible');
           // drop the stagger once revealed so hover effects respond instantly
           el.addEventListener('transitionend', function clear(e) {
@@ -187,7 +273,7 @@
     document.querySelectorAll('.legal__section').forEach(function (sec) { legalSpy.observe(sec); });
   }
 
-  /* ---------- Questions and answers: topic tabs, and one question open at a time ---------- */
+  /* ---------- Questions and answers: one question open at a time ---------- */
   document.querySelectorAll('.faq').forEach(function (faq) {
     function openOnly(item) {
       faq.querySelectorAll('.faq__item.is-open').forEach(function (o) {
@@ -196,25 +282,120 @@
       if (item) { item.classList.add('is-open'); item.querySelector('.faq__q button').setAttribute('aria-expanded', 'true'); }
     }
     faq.addEventListener('click', function (e) {
-      var tab = e.target.closest('.faq__tab');
-      if (tab) {
-        var topic = tab.dataset.topic;
-        faq.querySelectorAll('.faq__tab').forEach(function (t) {
-          var on = t === tab; t.classList.toggle('is-active', on); t.setAttribute('aria-pressed', String(on));
-        });
-        var first = null;
-        faq.querySelectorAll('.faq__item').forEach(function (it) {
-          var show = topic === 'all' || it.dataset.topic === topic; it.hidden = !show; if (show && !first) first = it;
-        });
-        openOnly(first); // the first question showing opens, as a hint that they open
-        return;
-      }
       var btn = e.target.closest('.faq__q button');
       if (!btn) return;
       var item = btn.closest('.faq__item'), opening = !item.classList.contains('is-open');
       openOnly(opening ? item : null);
     });
   });
+
+  /* ---------- Who we work with tabs ---------- */
+  document.querySelectorAll('.who').forEach(function (who) {
+    var tabs = [].slice.call(who.querySelectorAll('.who__tab'));
+    var panels = [].slice.call(who.querySelectorAll('.who__panel'));
+    var select = function (i, focus) {
+      tabs.forEach(function (t, n) {
+        var on = n === i;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        panels[n].hidden = !on;
+        panels[n].classList.remove('is-in');
+        if (on) { void panels[n].offsetWidth; panels[n].classList.add('is-in'); } // restart the line-by-line reveal
+      });
+      if (focus) tabs[i].focus();
+    };
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(i); });
+      t.addEventListener('keydown', function (e) {
+        var k = e.key, next = null;
+        if (k === 'ArrowDown' || k === 'ArrowRight') next = (i + 1) % tabs.length;
+        else if (k === 'ArrowUp' || k === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+        else if (k === 'Home') next = 0;
+        else if (k === 'End') next = tabs.length - 1;
+        if (next !== null) { e.preventDefault(); select(next, true); }
+      });
+    });
+    select(0);
+  });
+
+  /* ---------- Industries: expanding strip (desktop) ---------- */
+  var industryGrid = document.querySelector('.industry-grid');
+  if (industryGrid) {
+    var industries = [].slice.call(industryGrid.querySelectorAll('.industry'));
+    var wide = window.matchMedia('(min-width: 961px)');
+    var open = function (el) { industries.forEach(function (i) { i.classList.toggle('is-active', i === el); }); };
+    var setup = function () {
+      if (wide.matches) {
+        industryGrid.removeAttribute('tabindex');
+        industries.forEach(function (i) { i.tabIndex = 0; });
+        if (!industryGrid.querySelector('.is-active')) open(industries[0]);
+      } else {
+        industryGrid.tabIndex = 0;
+        industries.forEach(function (i) { i.removeAttribute('tabindex'); i.classList.remove('is-active'); });
+      }
+    };
+    industries.forEach(function (i) {
+      i.addEventListener('mouseenter', function () { if (wide.matches) open(i); });
+      i.addEventListener('focus', function () { if (wide.matches) open(i); });
+      i.addEventListener('click', function () { if (wide.matches) open(i); });
+    });
+    if (wide.addEventListener) wide.addEventListener('change', setup); else wide.addListener(setup);
+    setup();
+  }
+
+  /* ---------- Who we work with: the row you point at (or tab to) becomes the active one; the first is active to begin with ---------- */
+  document.querySelectorAll('.story-list').forEach(function (list) {
+    var stories = [].slice.call(list.querySelectorAll('.story'));
+    var activate = function (s) { stories.forEach(function (o) { o.classList.toggle('is-active', o === s); }); };
+    stories.forEach(function (s) {
+      s.addEventListener('mouseenter', function () { activate(s); });
+      s.addEventListener('focusin', function () { activate(s); });
+    });
+    if (stories.length) activate(stories[0]);
+  });
+
+  /* ---------- Premium cards: the metallic edge brightens near the cursor (mouse only) ---------- */
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var fadeEdge = function (el, to) { // eases the light in or out over half a second
+      cancelAnimationFrame(el._edgeFade);
+      var from = parseFloat(el.style.getPropertyValue('--edge-o')) || 0, start = performance.now();
+      var step = function (now) {
+        var k = Math.min(1, (now - start) / 500); k = 1 - Math.pow(1 - k, 3);
+        el.style.setProperty('--edge-o', (from + (to - from) * k).toFixed(3));
+        if (k < 1) el._edgeFade = requestAnimationFrame(step);
+      };
+      el._edgeFade = requestAnimationFrame(step);
+    };
+    document.querySelectorAll('.who__panel, .card-lux, .svc-panel').forEach(function (el) {
+      var raf = 0, x = 0, y = 0;
+      el.addEventListener('pointermove', function (e) {
+        var r = el.getBoundingClientRect(); x = e.clientX - r.left; y = e.clientY - r.top;
+        if (!raf) raf = requestAnimationFrame(function () { raf = 0; el.style.setProperty('--mx', x + 'px'); el.style.setProperty('--my', y + 'px'); });
+      });
+      el.addEventListener('pointerenter', function () { fadeEdge(el, 1); });
+      el.addEventListener('pointerleave', function () { fadeEdge(el, 0); });
+    });
+  }
+
+  /* ---------- Services: the photos drift slightly slower than the page as you scroll (gentle parallax) ---------- */
+  var parallaxImgs = [].slice.call(document.querySelectorAll('.svc-photo img'));
+  if (parallaxImgs.length && !reduceMotion) {
+    var parallaxQueued = false;
+    var parallaxUpdate = function () {
+      parallaxQueued = false;
+      var vh = window.innerHeight;
+      parallaxImgs.forEach(function (img) {
+        var r = img.parentElement.getBoundingClientRect();
+        if (r.bottom < -100 || r.top > vh + 100) return; // only photos on or near the screen
+        var p = (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2); // 1 = just below the screen, -1 = just above
+        img.style.setProperty('--py', (-p * 14).toFixed(1) + 'px');
+      });
+    };
+    var parallaxQueue = function () { if (!parallaxQueued) { parallaxQueued = true; requestAnimationFrame(parallaxUpdate); } };
+    window.addEventListener('scroll', parallaxQueue, { passive: true });
+    window.addEventListener('resize', parallaxQueue);
+    parallaxUpdate();
+  }
 
   /* ---------- Footer year ---------- */
   document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
