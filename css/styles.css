@@ -19,6 +19,11 @@
   src: url("../node_modules/@fontsource/inter/files/inter-latin-500-normal.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 
+/* Instrument Serif italic: used only for the accent word in the home headline (latin only: it is a single English word) */
+@font-face { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; font-display: swap;
+  src: url("../node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
 /* ==========================================================================
    Digital Gloss — shared stylesheet
    Mobile-first. Every rule states the one-column phone case unqualified and
@@ -436,9 +441,11 @@ h1, h2, h3, h4 { font-weight: 300; }
 .hero__grid {
   flex: 1;
   display: grid; gap: 28px; align-content: center;
+  position: relative; z-index: 1; /* the copy and buttons stay above the image where its faded top tucks underneath */
 }
-/* studio photo: bottom centre of the hero, edges and top feathered into the page background */
-.hero__photo { display: block; width: min(98vw, 1320px); margin: 24px auto calc(-1 * 48px); position: relative; z-index: 0; }
+/* hero image: bottom centre of the hero, edges and top feathered into the page background */
+.hero__photo { display: block; width: min(98vw, 1320px); margin: 24px auto calc(-1 * 48px); position: relative; z-index: 0;
+  mix-blend-mode: lighten; /* the image's black background takes on the page colour, so no darker box shows around the splash */ }
 .hero__photo img { display: block; width: 100%; height: auto;
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent), linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
   -webkit-mask-composite: source-in; mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent), linear-gradient(to right, transparent, #000 12%, #000 88%, transparent); mask-composite: intersect; }
@@ -462,14 +469,8 @@ h1, h2, h3, h4 { font-weight: 300; }
 /* tablet and up: the first line is the statement, the second a smaller, quieter line beneath it */
 @media (min-width: 768px) { .hero__title .muted { font-size: .5em; line-height: 1.35; margin-top: .45em; } }
 
-/* "High performance": stays white like the rest of the headline; a soft copper sheen sweeps across the words every few seconds */
-.gloss-word {
-  background: linear-gradient(100deg, #fff 0%, #fff 38%, #F2B48A 50%, #fff 62%, #fff 100%) 100% 0 / 250% 100% no-repeat;
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent; color: transparent;
-  animation: gloss-shimmer 5s ease-in-out 2s infinite;
-}
-@keyframes gloss-shimmer { 0%, 55% { background-position: 100% 0; } 100% { background-position: 0 0; } }
+/* the accent word in the headline: an elegant italic serif, set a little larger because serifs run small beside the sans */
+.gloss-word { font-family: "Instrument Serif", Georgia, "Times New Roman", serif; font-style: italic; font-weight: 400; font-size: 1.2em; line-height: .8; padding-right: .05em; }
 
 /* ---- Hero entrance: the beam draws out from the centre, then the headline eases in from a faint blur and the copy
    fades in behind it, one piece after another. No sliding. Plays once on load; skipped for reduced-motion visitors
@@ -482,9 +483,7 @@ h1, h2, h3, h4 { font-weight: 300; }
   html:not(.no-js) .hero__title .line:nth-child(1) .line__in { animation-delay: .3s; }
   html:not(.no-js) .hero__title .line:nth-child(2) .line__in { animation-delay: .4s; }
   html:not(.no-js) .hero__lede { animation: hero-fade .65s cubic-bezier(.33, 0, .2, 1) .65s both; }
-  html:not(.no-js) .hero__actions { animation: hero-fade .65s cubic-bezier(.33, 0, .2, 1) .75s both; }
-  html:not(.no-js) .hero__location { animation: hero-fade .65s cubic-bezier(.33, 0, .2, 1) .85s both; } /* last in, just after the buttons */
-}
+  html:not(.no-js) .hero__actions { animation: hero-fade .65s cubic-bezier(.33, 0, .2, 1) .75s both; }}
 @keyframes hero-fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes hero-focus { from { opacity: 0; filter: blur(4px); } to { opacity: 1; filter: blur(0); } }
 @keyframes hero-rule { from { clip-path: inset(0 50% 0 50%); } to { clip-path: inset(0 0 0 0); } }
@@ -492,9 +491,7 @@ h1, h2, h3, h4 { font-weight: 300; }
 .hero__side { display: grid; gap: 28px; }
 .hero__lede { max-width: 34em; color: var(--c-primary); text-wrap: balance; } /* balanced lines, so no single word is left alone on the last one */
 .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; }
-.hero__actions .btn { flex: 1 1 180px; }
-.hero__location { font-size: 12px; line-height: 18px; margin-top: 2px; } /* a quiet sign-off under the buttons */
-@media (min-width: 961px) {
+.hero__actions .btn { flex: 1 1 180px; }@media (min-width: 961px) {
   .hero { --hero-fs: clamp(44px, 5.4vw, 84px); }
   .hero__title.display { font-size: var(--hero-fs); line-height: 1.1; }
   .hero__actions .btn { flex: 0 0 auto; min-width: 176px; }
@@ -535,7 +532,7 @@ h1, h2, h3, h4 { font-weight: 300; }
 }
 /* hero copy centred on the page (tablet and up): wider headline box, intro and buttons beneath it on the same centre line */
 @media (min-width: 768px) {
-  .hero__grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "side"; justify-items: center; text-align: center; align-content: start; gap: 22px 0; }
+  .hero__grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "side"; justify-items: center; text-align: center; align-content: start; gap: 36px 0; } /* a clear step down from the headline to the buttons */
   .hero__head { width: min(100%, calc(var(--hero-fs, 40px) * 27)); }
   .hero__eyebrow { text-align: center; }
   .hero__eyebrow::after { left: 50%; transform: translate(-50%, 50%); }
@@ -1268,7 +1265,6 @@ a.contact-item:hover { border-color: var(--c-primary); }
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
   .reveal { opacity: 1; transform: none; }
   .site-footer.reveal--fade > .container { transform: none; }
-  .gloss-word { animation: none; background: none; -webkit-text-fill-color: currentColor; color: var(--c-on-surface); }
 }
 
 /* --------------------------------------------------------------------------
@@ -1611,8 +1607,9 @@ a.contact-item:hover { border-color: var(--c-primary); }
 }
 /* phones: a more compact hero */
 @media (max-width: 767px) {
-  .hero { min-height: 0; padding-top: calc(var(--header-h) + 28px); padding-bottom: 32px; }
-  .hero__grid, .hero__side { gap: 20px; }
+  .hero { min-height: 0; padding-top: calc(var(--header-h) + 44px); padding-bottom: 32px; }
+  .hero__grid { gap: 28px; } /* a clear step down from the headline to the buttons */
+  .hero__side { gap: 20px; }
   .hero__eyebrow { padding-bottom: 20px; margin-bottom: 20px; }
   .hero__title .muted { font-size: .62em; line-height: 1.3; margin-top: .35em; } /* the second line becomes a quieter sub-line, as on larger screens */
   .hero__photo { margin-top: 12px; }
@@ -1784,7 +1781,7 @@ a.contact-item:hover { border-color: var(--c-primary); }
 @media (min-width: 768px) and (max-width: 960px) {
   :root { --section-y: 60px; }
   .section-head { margin-bottom: 32px; }
-  .hero { min-height: 0; padding-top: calc(var(--header-h) + 40px); padding-bottom: 40px; } /* the hero sizes to its content rather than the full screen */
+  .hero { min-height: 0; padding-top: calc(var(--header-h) + 56px); padding-bottom: 40px; } /* the hero sizes to its content rather than the full screen */
   /* type */
   .label { font-size: 12px; line-height: 18px; }
   .display { font-size: 42px; line-height: 50px; }
@@ -2588,8 +2585,15 @@ a.contact-item:hover { border-color: var(--c-primary); }
 }
 /* desktop (961px+): home page, tighter */
 @media (min-width: 961px) {
-  .hero { padding-top: calc(var(--header-h) + 32px); }
-  .hero__photo { width: min(94vw, 1160px); margin-top: 16px; }
+  .hero { padding-top: calc(var(--header-h) + 56px); }
+  /* the image shrinks on shorter screens so the whole D and splash fit above the fold, and tucks its empty,
+     faded top up under the buttons so the D sits close beneath them */
+  .hero__grid { flex: none; } /* copy keeps its natural height, so on tall screens the image follows it instead of being pushed down */
+  .hero__photo {
+    --photo-w: min(94vw, 1320px, (100vh - 150px) * 1.6);
+    width: var(--photo-w);
+    margin-top: calc(var(--photo-w) * -0.075);
+  }
   .marquee { padding-block: clamp(10px, 1.4vw, 18px); }
   .marquee__list li { font-size: clamp(32px, 4.2vw, 60px); }
   .industry-grid { height: 380px; }
