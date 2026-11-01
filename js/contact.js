@@ -98,9 +98,15 @@
   }
 
   /* Service chips always start unticked — the visitor chooses (also after Back/Forward). */
-  function clearChips() { document.querySelectorAll('.chip input').forEach(function (c) { c.checked = false; }); }
-  clearChips();
-  window.addEventListener('pageshow', function (e) { if (e.persisted) clearChips(); });
+  function clearChips() { document.querySelectorAll('.chip input, .form-agree__box').forEach(function (c) { c.checked = false; }); }
+  /* …except when the visitor arrives from a service's "Start…" link (contact.html?service=web|marketing|branding): that service starts ticked. */
+  function applyServiceFromLink() {
+    var key = new URLSearchParams(window.location.search).get('service');
+    var box = key && document.querySelector('.chip input[data-key="' + key.replace(/[^a-z]/g, '') + '"]');
+    if (box && key !== 'unsure') box.checked = true;
+  }
+  clearChips(); applyServiceFromLink();
+  window.addEventListener('pageshow', function (e) { if (e.persisted) { clearChips(); applyServiceFromLink(); } });
 
   /* "Not sure yet" stands alone: ticking it clears the other services, and ticking any other service clears it. */
   var chipInputs = Array.prototype.slice.call(document.querySelectorAll('.chip input'));
@@ -118,24 +124,14 @@
   var form = document.getElementById('enquiry-form');
   if (!form) return;
 
-  var website = document.getElementById('website');
-  function normaliseUrl() {
-    var v = website.value.trim();
-    if (v && !/^https?:\/\//i.test(v)) website.value = 'https://' + v;
-  }
-  website.addEventListener('blur', normaliseUrl);
-
   var rules = {
     'first-name': function (v) { return v.trim().length > 0; },
     'second-name': function (v) { return v.trim().length > 0; },
     'email': function (v) { return /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v.trim()); },
     'phone': function (v) { var d = v.replace(/[^\d]/g, ''); return d.length >= 6 && d.length <= 15 && /^[\d\s()+\-.]+$/.test(v.trim()); },
-    'website': function (v) {
-      if (!v.trim()) return true;
-      try { var u = new URL(/^https?:\/\//i.test(v) ? v : 'https://' + v); return /\.[a-z]{2,}$/i.test(u.hostname); }
-      catch (e) { return false; }
-    },
-    'message': function (v) { return v.trim().length >= 5; }
+    'services-group': function () { return !!form.querySelector('input[name="services"]:checked'); },
+    'message': function (v) { return v.trim().length >= 5; },
+    'privacy-agree': function () { return document.getElementById('privacy-agree').checked; }
   };
 
   function check(id) {
@@ -148,26 +144,42 @@
   }
   Object.keys(rules).forEach(function (id) {
     var el = document.getElementById(id);
+    if (el.type === 'checkbox') { el.addEventListener('change', function () { check(id); }); return; }
+    if (el.matches('fieldset')) { el.addEventListener('change', function () { if (el.classList.contains('has-error')) check(id); }); return; }
     el.addEventListener('blur', function () { if (el.value || el.closest('.field').classList.contains('has-error')) check(id); });
     el.addEventListener('input', function () { if (el.closest('.field').classList.contains('has-error')) check(id); });
   });
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    normaliseUrl();
     var firstBad = null;
     Object.keys(rules).forEach(function (id) {
       if (!check(id) && !firstBad) firstBad = document.getElementById(id);
     });
-    if (firstBad) { firstBad.focus(); return; }
+    if (firstBad) { (firstBad.matches('fieldset') ? firstBad.querySelector('input') : firstBad).focus(); return; }
 
     var data = new FormData(form);
     var opt = select.options[select.selectedIndex];
     data.set('dial_code', opt.dataset.dial);
     data.set('country', opt.dataset.iso);
 
-    /* Connect a backend or form service here, e.g.
-       fetch('/api/enquiry', { method: 'POST', body: data }) */
+    /* No server yet: open the visitor's email app with the enquiry ready to send to the team */
+    var fullName = data.get('first_name').trim() + ' ' + data.get('second_name').trim();
+    var services = data.getAll('services').join(', ');
+    var lines = [
+      'Name: ' + fullName,
+      'Company: ' + (data.get('company') || '').trim(),
+      'Email: ' + data.get('email').trim(),
+      'Telephone: +' + opt.dataset.dial + ' ' + data.get('phone').trim(),
+      'Services: ' + services,
+      '',
+      'Message:',
+      data.get('message').trim(),
+      '',
+      'Privacy policy: read and agreed'
+    ];
+    window.location.href = 'mailto:solutions@digital-gloss.com?subject=' +
+      encodeURIComponent('Service Enquiry - ' + fullName) + '&body=' + encodeURIComponent(lines.join('\n'));
 
     document.querySelector('[data-first-name]').textContent = data.get('first_name').trim();
     document.getElementById('form-wrap').hidden = true;
