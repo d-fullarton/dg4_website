@@ -2137,12 +2137,6 @@ a.contact-item:hover { border-color: var(--c-primary); }
   .tag { height: 20px; padding: 0 7px; font-size: 10px; }
 }
 
-/* Services page: a chrome icon in front of each service heading */
-.service-detail h2 { display: flex; align-items: center; gap: 16px; }
-.svc-icon { flex: none; width: 56px; height: 56px; object-fit: contain; filter: drop-shadow(0 4px 14px rgba(0, 0, 0, .45)); }
-@media (max-width: 767px) { .svc-icon { width: 40px; height: 40px; } .service-detail h2 { gap: 12px; } }
-@media (min-width: 768px) and (max-width: 960px) { .svc-icon { width: 46px; height: 46px; } }
-
 /* --------------------------------------------------------------------------
    Services page: each service's list sits in a "What's included" panel. On desktop the panel takes the half of
    the page beside the text, alternating sides (Website development and Branding on the right, Marketing on the left);
@@ -2175,7 +2169,7 @@ a.contact-item:hover { border-color: var(--c-primary); }
 }
 @media (min-width: 961px) {
   .svc-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(48px, 6vw, 96px); align-items: center; }
-  #marketing .svc-side { order: -1; } /* Marketing's panel on the left, so the page alternates */
+  .svc-flip .svc-side { order: -1; } /* every second service has its panel on the left, so the page alternates */
   .svc-panel { padding: 30px 34px 14px; }
   .svc-list li { padding: 14px 0; }
 }
@@ -2418,8 +2412,8 @@ a.contact-item:hover { border-color: var(--c-primary); }
 @media (min-width: 961px) {
   .svc-side > .svc-photo { width: 86%; aspect-ratio: 16 / 10; justify-self: end; }   /* photo toward the outer edge… */
   .svc-side > .svc-panel { width: 84%; margin: -130px 0 0; justify-self: start; }    /* …panel overlapping it, toward the centre */
-  #marketing .svc-side > .svc-photo { justify-self: start; }
-  #marketing .svc-side > .svc-panel { justify-self: end; }
+  .svc-flip .svc-side > .svc-photo { justify-self: start; }
+  .svc-flip .svc-side > .svc-panel { justify-self: end; }
 }
 
 /* Services page: opening statement and a numbered index of the three services */
@@ -2677,7 +2671,6 @@ a.contact-item:hover { border-color: var(--c-primary); }
   .service-detail { padding-top: 22px; }
   .page-hero + .service-detail { padding-top: 16px; }
   .svc-layout { gap: 10px; }
-  .svc-icon { width: 34px; }
   .service-detail h2 { font-size: 22px; line-height: 27px; }
   .svc-copy .section-head { margin-bottom: 8px; }
   .svc-copy p { font-size: 13px; line-height: 19px; }
@@ -2705,7 +2698,6 @@ a.contact-item:hover { border-color: var(--c-primary); }
   .page-hero + .service-detail { padding-top: 20px; }
   .svc-layout { gap: 12px; }
   .service-detail h2 { font-size: 25px; line-height: 30px; }
-  .svc-icon { width: 36px; }
   .svc-copy p, .svc-copy p.body-lg { font-size: 14px; line-height: 21px; }
   .svc-copy p + p { margin-top: 10px; }
   .svc-cta { margin-top: 12px; }
@@ -2784,7 +2776,7 @@ a.contact-item:hover { border-color: var(--c-primary); }
 .svc-story__go { grid-area: go; align-self: center; }
 .svc-story:not(.is-pinned) .svc-story__go .link-ring__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } /* phones: just the arrow */
 
-.svc-story.is-pinned { --story-step: 50vh; height: calc(var(--stage-h, 480px) + 2 * var(--story-step)); padding-bottom: 0; }
+.svc-story.is-pinned { --story-step: 50vh; height: calc(var(--stage-h, 480px) + 3 * var(--story-step)); /* one scroll step between each of the four chapters */ padding-bottom: 0; }
 .svc-story.is-pinned .svc-story__stage {
   position: sticky; top: calc(var(--header-h) + max(16px, (100vh - var(--header-h) - var(--stage-h, 480px)) / 2)); /* held in the middle of the screen */
   display: grid; grid-template-columns: minmax(170px, 230px) minmax(0, 1fr); column-gap: clamp(32px, 6vw, 96px); align-items: center; padding-block: 24px;
@@ -2970,11 +2962,11 @@ a.contact-item:hover { border-color: var(--c-primary); }
 .audience::before { right: -32%; top: -10%; }
 .blog::before { left: -30%; top: 6%; }
 .founder::before { right: -34%; top: -30%; }
-#marketing.service-detail::before {
+#build.service-detail::before {
   content: ""; position: absolute; z-index: -1; pointer-events: none; aspect-ratio: 1; border-radius: 50%;
   width: min(1100px, 120vw); right: -34%; top: -12%; background: radial-gradient(closest-side, rgba(var(--glow-rgb), .07), rgba(var(--glow-rgb), .02) 55%, transparent 100%);
 }
-.services, .audience, .blog, .founder, #marketing.service-detail { overflow-x: clip; }
+.services, .audience, .blog, .founder, #build.service-detail { overflow-x: clip; }
 /* 404 page */
 .nf { min-height: calc(100svh - 120px); display: flex; align-items: center; padding-bottom: var(--section-y); }
 .nf__inner { position: relative; }
@@ -3002,3 +2994,15 @@ html body .page-hero .nf__code { font-size: clamp(120px, 24vw, 300px); line-heig
 }
 /* FAQ page: the page hero already supplies the space above the first question, same as the other inner pages */
 .section.faq-page { padding-top: 0; }
+
+/* Services page: a service with no photo shows its "What's included" panel on its own, full width of its column */
+.svc-side--plain > .svc-panel { margin: 0; width: 100%; justify-self: stretch; }
+@media (min-width: 768px) and (max-width: 960px) { .svc-side--plain > .svc-panel { margin: 0; } }
+@media (min-width: 961px) { .svc-side--plain > .svc-panel, .svc-flip .svc-side--plain > .svc-panel { width: 100%; margin: 0; justify-self: stretch; } }
+
+/* home services block: a little air between its heading and the paragraph */
+.services .svc-copy .headline-md + .service-detail__body { margin-top: 14px; }
+
+/* services page: a clearer gap between one service and the next now that they follow each other directly */
+@media (max-width: 767px) { .service-detail + .service-detail { padding-top: 56px; } }
+@media (min-width: 768px) and (max-width: 960px) { .service-detail + .service-detail { padding-top: 64px; } }
