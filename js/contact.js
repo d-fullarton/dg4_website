@@ -99,7 +99,7 @@
 
   /* Service chips always start unticked — the visitor chooses (also after Back/Forward). */
   function clearChips() { document.querySelectorAll('.chip input, .form-agree__box').forEach(function (c) { c.checked = false; }); }
-  /* …except when the visitor arrives from a service's "Start…" link (contact.html?service=ux|web|hosting|seo): that service starts ticked. */
+  /* …except when the visitor arrives from a service's "Start…" link (contact.html?service=web|brand|hosting|seo): that service starts ticked. */
   function applyServiceFromLink() {
     var key = new URLSearchParams(window.location.search).get('service');
     var box = key && document.querySelector('.chip input[data-key="' + key.replace(/[^a-z]/g, '') + '"]');

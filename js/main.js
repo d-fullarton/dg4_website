@@ -397,6 +397,57 @@
     parallaxUpdate();
   }
 
+  /* ---------- Home hero video: stays still for visitors who prefer reduced motion or are saving data ---------- */
+  (function () {
+    var video = document.querySelector('.x-hero__video');
+    if (!video) return;
+    var saveData = navigator.connection && navigator.connection.saveData;
+    if (reduceMotion || saveData) { video.removeAttribute('autoplay'); video.pause(); video.preload = 'none'; return; }
+    var start = function () { var p = video.play(); if (p && p.catch) p.catch(function () {}); };
+    start();
+    // if the browser's settings block autoplay (Safari can), start on the visitor's first tap, click or key press instead
+    var onGesture = function () { if (video.paused) start(); ['pointerdown', 'touchstart', 'keydown'].forEach(function (t) { window.removeEventListener(t, onGesture); }); };
+    ['pointerdown', 'touchstart', 'keydown'].forEach(function (t) { window.addEventListener(t, onGesture, { passive: true }); });
+    // Safari can pause a muted video when the tab comes back into view: resume it
+    document.addEventListener('visibilitychange', function () { if (!document.hidden && video.paused) start(); });
+  })();
+
+  /* ---------- Home statement: each word lights up as the sentence scrolls up through the screen ---------- */
+  (function () {
+    var text = document.querySelector('[data-words]');
+    if (!text) return;
+    if (reduceMotion) { text.closest('.x-statement').classList.add('is-static'); return; }
+    // wrap every word in a span, keeping any inner markup (the accent phrase)
+    var wrap = function (node) {
+      [].slice.call(node.childNodes).forEach(function (child) {
+        if (child.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          child.textContent.split(/(\s+)/).forEach(function (part) {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+            var s = document.createElement('span'); s.className = 'w'; s.textContent = part; frag.appendChild(s);
+          });
+          node.replaceChild(frag, child);
+        } else if (child.nodeType === 1) { wrap(child); }
+      });
+    };
+    wrap(text);
+    var words = [].slice.call(text.querySelectorAll('.w'));
+    var queued = false;
+    var update = function () {
+      queued = false;
+      var r = text.getBoundingClientRect(), vh = window.innerHeight;
+      // 0 when the sentence's top reaches 85% down the screen, 1 when its bottom reaches 45%
+      var p = (vh * 0.85 - r.top) / (vh * 0.85 - vh * 0.45 + r.height);
+      var lit = Math.round(Math.max(0, Math.min(1, p)) * words.length);
+      words.forEach(function (w, i) { w.classList.toggle('is-lit', i < lit); });
+    };
+    var queue = function () { if (!queued) { queued = true; requestAnimationFrame(update); } };
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    update();
+  })();
+
   /* ---------- Footer year ---------- */
   document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 

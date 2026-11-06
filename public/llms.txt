@@ -1,0 +1,25 @@
+# Digital Gloss
+
+> Digital Gloss is a website design and development studio in Abu Dhabi, UAE, serving start-ups, small businesses and independent consultants in the UAE and worldwide. Everything is explained in plain English, without technical jargon.
+
+## What we do
+
+- [Services](https://digital-gloss.com/services.html): Website design and development; content development; brand identity; domain and hosting; website maintenance; SEO and AI search optimisation; business email addresses.
+- [About](https://digital-gloss.com/about.html): who we are and how we work.
+- [FAQ](https://digital-gloss.com/faq.html): website cost, the Gloss Guarantee, hosting, support, templates and performance.
+- Concept work: three self-initiated concept websites for fictional brands (property, restaurant, wellness), linked from the home page.
+- [Contact](https://digital-gloss.com/contact.html): start a project by phone, WhatsApp, email or enquiry form.
+
+## Facts
+
+- Company: Digital Gloss Technology Solutions LLC SPC
+- Location: Abu Dhabi, United Arab Emirates
+- Email: solutions@digital-gloss.com
+- Phone: +971 55 581 0759
+- Pricing: fixed project prices agreed after a free consultation. Websites from AED 4,900 (Launch), AED 8,900 (Growth) and AED 14,900 (Signature); full list at https://digital-gloss.com/services.html#pricing
+- The Gloss Guarantee: fixed price; design refined until the client is happy, with the deposit refunded if they are still not happy after two rounds; three months of free maintenance if an agreed launch date is missed.
+- Websites are custom designed, not templates.
+
+## Optional
+
+- [Privacy policy](https://digital-gloss.com/privacy.html)
